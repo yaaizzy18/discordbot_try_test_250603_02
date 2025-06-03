@@ -1,0 +1,29 @@
+import discord
+from discord.ext import commands
+import os
+from dotenv import load_dotenv
+
+# .envファイルからトークンを読み込む
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+
+# ボットのインスタンスを作成
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Botとしてログインしました: {bot.user.name}')
+    print(f'ID: {bot.user.id}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send('こんにちは！私はテスト用のDiscordボットです！')
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send(f'Pong! {round(bot.latency * 1000)}ms')
+
+# ボットを起動
+bot.run(TOKEN)
