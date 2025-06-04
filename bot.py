@@ -2,6 +2,12 @@ import discord
 from discord.ext import commands
 import os
 
+# デバッグ用ログ
+print("Starting bot...")
+print(f"Environment variables: {dict(os.environ)}")
+print(f"DISCORD_TOKEN found: {'DISCORD_TOKEN' in os.environ}")
+print(f"Token value: {os.environ.get('DISCORD_TOKEN')}")
+
 # .envファイルからトークンを読み込む
 TOKEN = os.environ.get('DISCORD_TOKEN')
 
