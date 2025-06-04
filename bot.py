@@ -24,6 +24,19 @@ async def on_ready():
     print(f'Botとしてログインしました: {bot.user.name}')
     print(f'ID: {bot.user.id}')
 
+@bot.event
+async def on_message(message):
+    # ボット自身のメッセージは無視
+    if message.author == bot.user:
+        return
+
+    # 「こんにちは」に反応
+    if message.content == 'こんにちは':
+        await message.channel.send('こんにちは！元気ですか？')
+
+    # 他のコマンドを処理するため、process_commandsを呼び出す
+    await bot.process_commands(message)
+
 @bot.command()
 async def hello(ctx):
     await ctx.send('こんにちは！私はテスト用のDiscordボットです！')
