@@ -1,11 +1,9 @@
 import discord
 from discord.ext import commands
 import os
-from dotenv import load_dotenv
 
 # .envファイルからトークンを読み込む
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.environ.get('DISCORD_TOKEN')
 
 # ボットのインスタンスを作成
 intents = discord.Intents.default()
