@@ -3,7 +3,7 @@ services:
     name: discord-bot
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python3 bot.py
+    startCommand: python3 -m bot
     envVars:
       - key: DISCORD_TOKEN
         fromSecret: true # RenderのSecretsで設定することを推奨
@@ -12,3 +12,4 @@ services:
       interval: 30s
       timeout: 5s
       threshold: 3
+    port: 8080
