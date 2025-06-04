@@ -7,4 +7,8 @@ services:
     envVars:
       - key: DISCORD_TOKEN
         fromSecret: true # RenderのSecretsで設定することを推奨
-    port: 0  # ポートスキャンを無効化
+    healthCheck:
+      type: none
+      interval: 30s
+      timeout: 5s
+      threshold: 3
