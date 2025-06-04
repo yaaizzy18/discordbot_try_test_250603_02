@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import os
+from flask import Flask, request
+import threading
+import asyncio
 
 # デバッグ用ログ
 print("Starting bot...")
@@ -29,5 +32,26 @@ async def hello(ctx):
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms')
 
-# ボットを起動
-bot.run(TOKEN)
+# Flaskサーバーの設定
+app = Flask(__name__)
+
+@app.route('/health')
+def health_check():
+    return 'OK'
+
+@app.route('/')
+def index():
+    return 'Discord Bot is running'
+
+# メイン関数
+def main():
+    # Flaskサーバーを別スレッドで起動
+    flask_thread = threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8080))
+    flask_thread.daemon = True
+    flask_thread.start()
+    
+    # Discordボットを起動
+    bot.run(TOKEN)
+
+if __name__ == '__main__':
+    main()
