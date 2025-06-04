@@ -7,4 +7,4 @@ services:
     envVars:
       - key: DISCORD_TOKEN
         fromSecret: true # RenderのSecretsで設定することを推奨
-    port: 0  # ポートを0に設定して、ポートスキャンを無効化
+    port: 0  # ポートスキャンを無効化
